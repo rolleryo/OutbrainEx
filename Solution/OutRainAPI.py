@@ -21,4 +21,12 @@ weatherReq = requests.get('http://api.openweathermap.org/data/2.5/weather?units=
 ### parse response using json
 data = json.loads(weatherReq)
 temp=data['main']['temp']
-print(temp)
+
+### format response as json 
+value = {
+        "city": city,
+        "country": country,
+        "temp": temp,
+        }
+jsonString = json.dumps(value)
+print(jsonString)
