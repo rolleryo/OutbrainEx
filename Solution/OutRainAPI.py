@@ -3,6 +3,7 @@
 import requests #http://docs.python-requests.org/en/latest/
 from requests import get
 import ipinfo # get ip based location
+import json
 
 # get external ip using http request from ipify
 external_ip = get('https://api.ipify.org').content.decode('utf8')
@@ -16,4 +17,8 @@ country = ipinfo_details.country
 
 ### get temp with respect to city & country 
 weatherReq = requests.get('http://api.openweathermap.org/data/2.5/weather?units=metric&q='+city+','+country+'&APPID=0a1e14ce198f208c5665f1b1a6bb4879').text
-print(weatherReq)
+
+### parse response using json
+data = json.loads(weatherReq)
+temp=data['main']['temp']
+print(temp)
