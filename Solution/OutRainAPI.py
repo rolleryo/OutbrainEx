@@ -7,17 +7,20 @@ import json
 from flask import *
 import time # just for API testing 
 
-def getTemp():
-    # get external ip using http request from ipify
-    external_ip = get('https://api.ipify.org').content.decode('utf8')
+def getTemp(req_city):
+    if req_city == None: 
+        # get external ip using http request from ipify
+        external_ip = get('https://api.ipify.org').content.decode('utf8')
 
-    # get city & country according to external ip using ipinfo library
-    ipinfo_token = 'd5a13af3bebba0'
-    handler = ipinfo.getHandler(ipinfo_token) # create object handler 
-    ipinfo_details = handler.getDetails(external_ip) # use getDetails property
-    city = ipinfo_details.city
-    country = ipinfo_details.country
-
+        # get city & country according to external ip using ipinfo library
+        ipinfo_token = 'd5a13af3bebba0'
+        handler = ipinfo.getHandler(ipinfo_token) # create object handler 
+        ipinfo_details = handler.getDetails(external_ip) # use getDetails property
+        city = ipinfo_details.city
+        country = ipinfo_details.country
+    else: 
+        city = req_city
+        country = ''
     ### get temp with respect to city & country 
     weatherReq = requests.get('http://api.openweathermap.org/data/2.5/weather?units=metric&q='+city+','+country+'&APPID=0a1e14ce198f208c5665f1b1a6bb4879').text
 
@@ -43,7 +46,9 @@ def home_page(): # funcion annotation
     #data_set = {'Page':'home', 'Timestamp':time.time()} # data dictionary to return as json
     #json_dump = json.dumps(data_set) # turn data_set to json
     #return json_dump
-    return getTemp() 
+    return getTemp(none) 
+
+
 
 if __name__ == '__main__':
     app.run(port=7777) #run local server
