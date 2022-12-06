@@ -13,4 +13,7 @@ handler = ipinfo.getHandler(ipinfo_token) # create object handler
 ipinfo_details = handler.getDetails(external_ip) # use getDetails property
 city = ipinfo_details.city
 country = ipinfo_details.country
-print("City:"+city+" Country "+country)
+
+### get temp with respect to city & country 
+weatherReq = requests.get('http://api.openweathermap.org/data/2.5/weather?units=metric&q='+city+','+country+'&APPID=0a1e14ce198f208c5665f1b1a6bb4879').text
+print(weatherReq)
