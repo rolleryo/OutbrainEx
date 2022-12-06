@@ -43,12 +43,12 @@ app = Flask (__name__)  # creat the flask app with project name
 
 @app.route('/v1/api/checkCurrentWeather',methods=['GET']) # create the endpoint
 def home_page(): # funcion annotation
-    #data_set = {'Page':'home', 'Timestamp':time.time()} # data dictionary to return as json
-    #json_dump = json.dumps(data_set) # turn data_set to json
-    #return json_dump
-    return getTemp(none) 
+    return getTemp(None)
 
-
-
+@app.route('/v1/api/checkCityWeather',methods=['GET']) # create the endpoint
+def request_page(): # funcion annotation
+    req_city = str(request.args.get('city')) #/?city=Haifa
+    return getTemp(req_city) 
+ 
 if __name__ == '__main__':
     app.run(port=7777) #run local server
