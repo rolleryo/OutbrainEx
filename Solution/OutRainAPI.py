@@ -4,6 +4,8 @@ import requests #http://docs.python-requests.org/en/latest/
 from requests import get
 import ipinfo # get ip based location
 import json
+from flask import *
+import time # just for API testing 
 
 def getTemp():
     # get external ip using http request from ipify
@@ -33,4 +35,15 @@ def getTemp():
     
     return (jsonString)
 
-print(getTemp())
+#  API service
+app = Flask (__name__)  # creat the flask app with project name
+
+@app.route('/v1/api/checkCurrentWeather',methods=['GET']) # create the endpoint
+def home_page(): # funcion annotation
+    #data_set = {'Page':'home', 'Timestamp':time.time()} # data dictionary to return as json
+    #json_dump = json.dumps(data_set) # turn data_set to json
+    #return json_dump
+    return getTemp() 
+
+if __name__ == '__main__':
+    app.run(port=7777) #run local server
