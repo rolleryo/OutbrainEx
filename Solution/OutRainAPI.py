@@ -5,7 +5,6 @@ from requests import get
 import ipinfo # get ip based location
 import json
 from flask import *
-import time # just for API testing 
 
 def getTemp(req_city):
     if req_city == None: 
@@ -49,20 +48,21 @@ def getDriveStatus(statusFilter):
      result = ""
      for eachDrive in lines: 
         if (eachDrive.find(statusFilter)>0):
+            print(eachDrive)
             result += eachDrive 
      return("found "+str(statusCount)+" "+statusFilter+" drives\n" +result) 
      # fix capital letters depentend statusFilter  
-
+     
 #  API service
 app = Flask (__name__)  # creat the flask app with project name
-app.debug = True
+# app.debug = True
 
 @app.route('/v1/api/checkCurrentWeather',methods=['GET']) # create the endpoint
-def home_page(): # funcion annotation
+def request_weather(): # funcion annotation
     return getTemp(None)
 
 @app.route('/v1/api/checkCityWeather',methods=['GET']) # create the endpoint
-def request_weather(): # funcion annotation
+def request_weather_by_city(): # funcion annotation
     req_city = str(request.args.get('city')) #/?city=Haifa
     # insert validity check....if argument exist...
     return getTemp(req_city) 
@@ -93,4 +93,6 @@ def request_status(): # funcion annotation
  
 if __name__ == '__main__':
     app.run(port=7777) #run local server
+    # app.run(debug=True, host='0.0.0.0', port=7777)
+    
     app.logger.info("status filter %s",request.args.get('status'))
