@@ -20,10 +20,10 @@ Outbrain API.postman_collection
 
 ##to query the service you may use the following
 
-(127.0.0.1:7777/v1/api/checkCityWeather)
-(127.0.0.1:7777/v1/api/checkCityWeather?city=Haifa)
-(127.0.0.1:7777/v1/api/driveStatus?status=Offline)
-(127.0.0.1:7777/v1/api/driveStatus?status=Online)
-(127.0.0.1:7777/v1/api/driveStatus (must include a json file in the body))
+<127.0.0.1:7777/v1/api/checkCityWeather>
+<127.0.0.1:7777/v1/api/checkCityWeather?city=Haifa>
+<127.0.0.1:7777/v1/api/driveStatus?status=Offline>
+<127.0.0.1:7777/v1/api/driveStatus?status=Online>
+<127.0.0.1:7777/v1/api/driveStatus (must include a json file in the body)>
 
 #for your conveniencce, you may import the import the "Outbrain API postman collection" to the postman app. 
