@@ -44,21 +44,17 @@ def getTemp(req_city):
     ### get temp with respect to city & country 
     weatherReq = requests.get('http://api.openweathermap.org/data/2.5/weather?units=metric&q='+city+','+country+'&APPID=c766a39d9c387c7527524122df20c77f').text
     
-    if weatherReq.find("404"):
-        logging.info ("city not found")
-        return("city not found")
-    else:
-        ### parse response using json
-        data = json.loads(weatherReq)
-        temp = data['main']['temp']
-        ### format response as json 
-        value = {
-                "city": city,
-                "country": country,
-                "temp": temp,
-                }
-        jsonString = json.dumps(value)       
-        return (jsonString)
+    ### parse response using json
+    data = json.loads(weatherReq)
+    temp = data['main']['temp']
+    ### format response as json 
+    value = {
+            "city": city,
+            "country": country,
+            "temp": temp,
+            }
+    jsonString = json.dumps(value)       
+    return (jsonString)
 
 def getTemp2(req_city):
     if req_city == None:
