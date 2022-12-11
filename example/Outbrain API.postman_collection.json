@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "7c2ccc97-47f4-44a1-8b04-1f856339d9ef",
+		"name": "Outbrain API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24802836"
+	},
+	"item": [
+		{
+			"name": "get weather by public IP",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:7777/v1/api/checkCityWeather",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7777",
+					"path": [
+						"v1",
+						"api",
+						"checkCityWeather"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get weather by city",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:7777/v1/api/checkCityWeather?city=Haifa\n",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7777",
+					"path": [
+						"v1",
+						"api",
+						"checkCityWeather"
+					],
+					"query": [
+						{
+							"key": "city",
+							"value": "Haifa\n"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get drive status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:7777/v1/api/driveStatus?status=Offline",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7777",
+					"path": [
+						"v1",
+						"api",
+						"driveStatus"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "Offline"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post drive status json",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"sp 0\": \"Out\",\r\n  \"sp 1\": \"Rain\"\r\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:7777/v1/api/driveStatus",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7777",
+					"path": [
+						"v1",
+						"api",
+						"driveStatus"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
