@@ -2,9 +2,10 @@
 
 import requests #http://docs.python-requests.org/en/latest/
 from requests import get
+from fastapi import FastAPI
 import ipinfo # get ip based location
 import json
-from flask import *
+# from flask import *
 
 def getTemp(req_city):
     if req_city == None: 
@@ -54,45 +55,47 @@ def getDriveStatus(statusFilter):
      # fix capital letters depentend statusFilter  
      
 #  API service
-app = Flask (__name__)  # creat the flask app with project name
+# app = Flask (__name__)  # creat the flask app with project name
 # app.debug = True
+app = FastAPI()
 
-@app.route('/v1/api/checkCurrentWeather',methods=['GET']) # create the endpoint
+# @app.route('/v1/api/checkCurrentWeather',methods=['GET']) # create the endpoint
+@app.get('/v1/api/checkCurrentWeather') # create the endpoint
 def request_weather(): # funcion annotation
     return getTemp(None)
 
-@app.route('/v1/api/checkCityWeather',methods=['GET']) # create the endpoint
-def request_weather_by_city(): # funcion annotation
-    req_city = str(request.args.get('city')) #/?city=Haifa
-    # insert validity check....if argument exist...
-    return getTemp(req_city) 
+# @app.route('/v1/api/checkCityWeather',methods=['GET']) # create the endpoint
+# def request_weather_by_city(): # funcion annotation
+#     req_city = str(request.args.get('city')) #/?city=Haifa
+#     # insert validity check....if argument exist...
+#     return getTemp(req_city) 
 
-@app.route('/v1/api/driveStatus',methods=['POST']) # create the endpoint
-def send_json(): # funcion annotation
-    receivedJson = request.get_json(force=True) 
-    # writeFileToDisk("input.json",receivedJson) // tried to implement with function and had issues
-    try: 
-        with open('input.json', 'w') as outfile:
-            json.dump(receivedJson, outfile)
-    except Exception as e:
-        print("an error occured writing the file", e)
-        status = 'failure'
-    else:
-        status = 'success'    
-    statusMessage = {
-            "message": status         
-            }
-    return(json.dumps(statusMessage))
+# @app.route('/v1/api/driveStatus',methods=['POST']) # create the endpoint
+# def send_json(): # funcion annotation
+#     receivedJson = request.get_json(force=True) 
+#     # writeFileToDisk("input.json",receivedJson) // tried to implement with function and had issues
+#     try: 
+#         with open('input.json', 'w') as outfile:
+#             json.dump(receivedJson, outfile)
+#     except Exception as e:
+#         print("an error occured writing the file", e)
+#         status = 'failure'
+#     else:
+#         status = 'success'    
+#     statusMessage = {
+#             "message": status         
+#             }
+#     return(json.dumps(statusMessage))
     
 
-@app.route('/v1/api/driveStatus',methods=['GET']) # create the endpoint
-def request_status(): # funcion annotation
-    statusFilter = str(request.args.get('status')) 
-    return (getDriveStatus(statusFilter))
-    #return("status requested:"+statusFilter) 
+# @app.route('/v1/api/driveStatus',methods=['GET']) # create the endpoint
+# def request_status(): # funcion annotation
+#     statusFilter = str(request.args.get('status')) 
+#     return (getDriveStatus(statusFilter))
+#     #return("status requested:"+statusFilter) 
  
-if __name__ == '__main__':
-    app.run(port=7777) #run local server
+# if __name__ == '__main__':
+#     app.run(port=7777) #run local server
     # app.run(debug=True, host='0.0.0.0', port=7777)
     
-    app.logger.info("status filter %s",request.args.get('status'))
+    # app.logger.info("status filter %s",request.args.get('status'))
